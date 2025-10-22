@@ -81,8 +81,8 @@ publishing {
             name = "bypixelReleases"
             url = uri("https://repo.bypixel.dev/releases/")
             credentials{
-                username = System.getenv("REPO_USERNAME")
-                password = System.getenv("REPO_PASSWORD")
+                username = findProperty("bypixelRepoUser").toString()
+                password = findProperty("bypixelRepoToken").toString()
             }
         }
 
