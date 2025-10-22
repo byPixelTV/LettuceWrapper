@@ -55,19 +55,10 @@ class LettuceRedisClient(host: String, port: Int, private val password: String?,
     }
 
     @OptIn(ExperimentalLettuceCoroutinesApi::class)
-    fun sendCustomMessage(message: JSONObject, channel: String) {
+    fun sendMessage(message: JSONObject, channel: String) {
         coroutineScope.launch(Dispatchers.IO) {
             connection.coroutines().publish(channel, message.toString())
         }
-    }
-
-    fun sendMessage(message: String, channel: String, action: String? = "lettucewrapper") {
-        val json = JSONObject().apply {
-            put("messages", message)
-            put("action", action)
-            put("date", System.currentTimeMillis())
-        }
-        sendCustomMessage(json, channel)
     }
 
     suspend fun jsonDel(key: String, path: String = "."): Long = withContext(Dispatchers.IO) {
