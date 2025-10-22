@@ -37,7 +37,6 @@ abstract class RedisListener(protected val channel: String) {
                 pubSubConnection = lettuceClient!!.redisClient.connectPubSub()
                 pubSubCommands = pubSubConnection.reactive()
 
-                // Listener registrieren
                 pubSubConnection.addListener(object : RedisPubSubListener<String, String> {
                     override fun message(channel: String, message: String) {
                         listeners.filter { it.channel == channel }

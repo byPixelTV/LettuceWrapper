@@ -4,8 +4,59 @@ plugins {
     id("signing")
 }
 
+
+fun getLatestTag(): String {
+    try {
+        // fetch all tags (remote + local)
+        ProcessBuilder("git", "fetch", "--tags")
+            .redirectErrorStream(true)
+            .start()
+            .apply {
+                inputStream.bufferedReader().use { it.readText() }
+                waitFor()
+            }
+
+        // get current branch
+        val branch = ProcessBuilder("git", "rev-parse", "--abbrev-ref", "HEAD")
+            .redirectErrorStream(true)
+            .start()
+            .inputStream
+            .bufferedReader()
+            .use { it.readText().trim() }
+
+        // get latest tag
+        val tagProcess = ProcessBuilder("git", "describe", "--tags", "--abbrev=0")
+            .redirectErrorStream(true)
+            .start()
+
+        val rawTag = tagProcess.inputStream.bufferedReader().use { it.readText().trim() }
+        tagProcess.waitFor()
+
+        if (rawTag.isEmpty()) return "unknown"
+
+        val tag = rawTag.removePrefix("v")
+
+        return if (branch == "release") {
+            tag
+        } else {
+            // get short commit hash
+            val commitProcess = ProcessBuilder("git", "rev-parse", "--short", "HEAD")
+                .redirectErrorStream(true)
+                .start()
+            val commit = commitProcess.inputStream.bufferedReader().use { it.readText().trim() }
+            commitProcess.waitFor()
+
+            "$tag+$commit"
+        }
+    } catch (e: Exception) {
+        return "unknown"
+    }
+}
+
+val versionString = getLatestTag()
+
 group = "dev.bypixel"
-version = "1.0.0"
+version = versionString
 
 repositories {
     mavenCentral()
@@ -37,8 +88,8 @@ publishing {
             name = "bypixelSnapshots"
             url = uri("https://repo.bypixel.dev/snapshots/")
             credentials{
-                username = System.getenv("REPO_USERNAME")
-                password = System.getenv("REPO_PASSWORD")
+                username = findProperty("bypixelRepoUser").toString()
+                password = findProperty("bypixelRepoToken").toString()
             }
         }
     }

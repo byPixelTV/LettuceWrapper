@@ -1,0 +1,140 @@
+name: Build, Release & Publish Maven
+
+permissions:
+  contents: write
+  packages: write
+  actions: write
+
+env:
+  bypixelRepoUser: ${{ secrets.BYPIXEL_REPO_USER }}
+  bypixelRepoToken: ${{ secrets.BYPIXEL_REPO_TOKEN }}
+
+on:
+  push:
+    branches:
+      - release
+      - nightly
+
+jobs:
+  build_release:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Fetch all Git tags
+        run: git fetch --tags
+
+      - name: Check for new commits since last tag
+        if: github.ref == 'refs/heads/release'
+        id: check_commits
+        run: |
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          echo "last_tag=$LAST_TAG" >> $GITHUB_OUTPUT
+
+          if [ -z "$LAST_TAG" ]; then
+            echo "no_last_tag=true" >> $GITHUB_OUTPUT
+          else
+            NEW_COMMITS=$(git log ${LAST_TAG}..HEAD --oneline)
+            if [ -z "$NEW_COMMITS" ]; then
+              echo "no_new_commits=true" >> $GITHUB_OUTPUT
+            else
+              echo "no_new_commits=false" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+      - name: Get next version
+        if: github.ref == 'refs/heads/release' && steps.check_commits.outputs.no_new_commits != 'true'
+        id: version
+        uses: mathieudutour/github-tag-action@v6.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          release_branches: release
+          tag_prefix: "v"
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          java-version: 21
+          distribution: temurin
+          cache: gradle
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Build Gradle projects
+        run: bash ./gradlew shadowJar
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: build/libs/*.jar
+
+      - name: Generate changelog
+        if: github.ref == 'refs/heads/release' && steps.check_commits.outputs.no_new_commits != 'true'
+        id: changelog
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PREV_TAG=${{ steps.check_commits.outputs.last_tag }}
+          CURR_TAG=${{ steps.version.outputs.new_tag }}
+
+          git log ${PREV_TAG}..HEAD --pretty=format:"%H|%s" | while IFS="|" read -r COMMIT_HASH MESSAGE; do
+            AUTHOR_LOGIN=$(gh api repos/${{ github.repository }}/commits/$COMMIT_HASH --jq '.author.login // empty')
+            AUTHOR_NAME=$(gh api repos/${{ github.repository }}/commits/$COMMIT_HASH --jq '.commit.author.name // empty')
+
+            if [[ "$AUTHOR_LOGIN" == *"bot"* ]]; then
+              echo "- $MESSAGE ([${COMMIT_HASH:0:7}](https://github.com/${{ github.repository }}/commit/$COMMIT_HASH)) by $AUTHOR_NAME" >> RELEASE_NOTES.md
+            else
+              if [[ -n "$AUTHOR_LOGIN" ]]; then
+                echo "- $MESSAGE ([${COMMIT_HASH:0:7}](https://github.com/${{ github.repository }}/commit/$COMMIT_HASH)) by @$AUTHOR_LOGIN" >> RELEASE_NOTES.md
+              else
+                echo "- $MESSAGE ([${COMMIT_HASH:0:7}](https://github.com/${{ github.repository }}/commit/$COMMIT_HASH)) by $AUTHOR_NAME" >> RELEASE_NOTES.md
+              fi
+            fi
+          done
+
+          echo "" >> RELEASE_NOTES.md
+          echo "- **Full Changelog**: https://github.com/${{ github.repository }}/compare/${PREV_TAG}...${CURR_TAG}" >> RELEASE_NOTES.md
+
+      - name: Create GitHub Release
+        if: github.ref == 'refs/heads/release' && steps.check_commits.outputs.no_new_commits != 'true'
+        id: github_release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.new_tag }}
+          name: "LettuceWrapper | ${{ steps.version.outputs.new_tag }} Release"
+          body_path: RELEASE_NOTES.md
+          files: build/libs/*.jar
+
+      - name: Prepare artifact filename
+        if: github.ref == 'refs/heads/release' && steps.check_commits.outputs.no_new_commits != 'true'
+        id: artifact_name
+        run: |
+          TAG=${{ steps.version.outputs.new_tag }}
+          STRIPPED=${TAG#v}
+
+          cp build/libs/*.jar "LettuceWrapper-${STRIPPED}.jar"
+          
+          echo "jar=LettuceWrapper-${STRIPPED}.jar" >> $GITHUB_OUTPUT
+
+      - name: Publish to Maven Release Repository
+        if: github.ref == 'refs/heads/release' && steps.check_commits.outputs.no_new_commits != 'true'
+        run: ./gradlew :common:publishMavenPublicationToBypixelReleasesRepository
+        env:
+          bypixelRepoUser: ${{ secrets.BYPIXEL_REPO_USER }}
+          bypixelRepoToken: ${{ secrets.BYPIXEL_REPO_TOKEN }}
+
+      - name: Publish to Maven Snapshot Repository
+        if: github.ref == 'refs/heads/nightly'
+        run: |
+          echo "bypixelRepoUser=${{ secrets.BYPIXEL_REPO_USER }}" >> gradle.properties
+          echo "bypixelRepoToken=${{ secrets.BYPIXEL_REPO_TOKEN }}" >> gradle.properties
+          ./gradlew :common:publishMavenPublicationToBypixelSnapshotsRepository
+        env:
+          bypixelRepoUser: ${{ secrets.BYPIXEL_REPO_USER }}
+          bypixelRepoToken: ${{ secrets.BYPIXEL_REPO_TOKEN }}
