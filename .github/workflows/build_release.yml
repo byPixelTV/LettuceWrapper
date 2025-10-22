@@ -124,7 +124,10 @@ jobs:
 
       - name: Publish to Maven Release Repository
         if: github.ref == 'refs/heads/release' && steps.check_commits.outputs.no_new_commits != 'true'
-        run: ./gradlew :publishMavenPublicationToBypixelReleasesRepository
+        run: |
+          echo "bypixelRepoUser=${{ secrets.BYPIXEL_REPO_USER }}" >> gradle.properties
+          echo "bypixelRepoToken=${{ secrets.BYPIXEL_REPO_TOKEN }}" >> gradle.properties
+          ./gradlew :publishMavenPublicationToBypixelReleasesRepository
         env:
           bypixelRepoUser: ${{ secrets.BYPIXEL_REPO_USER }}
           bypixelRepoToken: ${{ secrets.BYPIXEL_REPO_TOKEN }}
