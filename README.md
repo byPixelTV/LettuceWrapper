@@ -69,9 +69,9 @@
 >
 > LettuceWrapper: 
 > 
-> [![Latest Version](https://repo.bypixel.dev/api/badge/latest/releases/dev/bypixel/LettuceWrapper?color=40c14a&name=LettuceWrapper-Release&filter=none:+)](https://repo.bypixel.dev/#/releases/dev/bypixel/LettuceWrapper)
+> [![Latest Version](https://repo.bypixel.dev/api/badge/latest/releases/dev/bypixel/LettuceWrapper?color=40c14a&name=LettuceWrapper-Release)](https://repo.bypixel.dev/#/releases/dev/bypixel/LettuceWrapper)
 > 
-> [![Snapshot Version](https://repo.bypixel.dev/api/badge/latest/releases/dev/bypixel/LettuceWrapper?color=40c14a&name=LettuceWrapper-Snapshot&filter=has:+)](https://repo.bypixel.dev/#/releases/dev/bypixel/LettuceWrapper)
+> [![Snapshot Version](https://repo.bypixel.dev/api/badge/latest/snapshots/dev/bypixel/LettuceWrapper?color=40c14a&name=LettuceWrapper-Snapshot)](https://repo.bypixel.dev/#/releases/dev/bypixel/LettuceWrapper)
 > 
 > Lettuce:
 > 
