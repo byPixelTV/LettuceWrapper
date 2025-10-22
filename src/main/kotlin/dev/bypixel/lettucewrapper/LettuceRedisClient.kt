@@ -22,10 +22,20 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 
-class LettuceRedisClient(host: String, port: Int, private val password: String?, private val coroutineScope: CoroutineScope) {
+class LettuceRedisClient(
+    host: String,
+    port: Int,
+    private val password: String? = null,
+    private val coroutineScope: CoroutineScope,
+    private val username: String? = null,
+    private val db: Int? = null
+) {
 
     private val redisUri = RedisURI.Builder.redis(host, port).apply {
-        password?.takeIf { it.isNotBlank() }?.let { withPassword(it.toCharArray()) }
+        username?.takeIf { it.isNotBlank() }?.let { withAuthentication(it, password?.toCharArray()) }
+            ?: password?.takeIf { it.isNotBlank() }?.let { withPassword(it.toCharArray()) }
+
+        db?.takeIf { it >= 0 }?.let { withDatabase(it) }
     }.build()
 
     val redisClient: RedisClient = RedisClient.create(redisUri)
