@@ -65,13 +65,13 @@ repositories {
 }
 
 dependencies {
-    implementation("io.lettuce:lettuce-core:6.8.1.RELEASE") {
+    compileOnly("io.lettuce:lettuce-core:6.8.1.RELEASE") {
         exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-core")
         exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-reactive")
     }
-    implementation("org.json:json:20250517")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.10.2")
+    compileOnly("org.json:json:20250517")
+    compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+    compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.10.2")
 }
 
 
