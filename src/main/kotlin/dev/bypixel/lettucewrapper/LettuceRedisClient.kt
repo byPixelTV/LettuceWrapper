@@ -1,8 +1,6 @@
 package dev.bypixel.lettucewrapper
 
-import io.lettuce.core.ExperimentalLettuceCoroutinesApi
-import io.lettuce.core.RedisClient
-import io.lettuce.core.RedisURI
+import io.lettuce.core.*
 import io.lettuce.core.api.StatefulRedisConnection
 import io.lettuce.core.api.coroutines
 import io.lettuce.core.api.sync.RedisCommands
@@ -12,6 +10,7 @@ import io.lettuce.core.output.StatusOutput
 import io.lettuce.core.output.ValueOutput
 import io.lettuce.core.protocol.CommandArgs
 import io.lettuce.core.protocol.CommandType
+import io.netty.handler.ssl.util.InsecureTrustManagerFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.filter
@@ -21,24 +20,54 @@ import kotlinx.coroutines.future.await
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
+import java.io.FileInputStream
+import java.security.KeyStore
+import javax.net.ssl.TrustManagerFactory
 
 class LettuceRedisClient(
-    host: String,
-    port: Int,
-    private val password: String? = null,
-    private val coroutineScope: CoroutineScope,
-    private val username: String? = null,
-    private val db: Int? = null
+    credentials: RedisCredentials,
+    private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
 ) {
 
-    private val redisUri = RedisURI.Builder.redis(host, port).apply {
-        username?.takeIf { it.isNotBlank() }?.let { withAuthentication(it, password?.toCharArray()) }
-            ?: password?.takeIf { it.isNotBlank() }?.let { withPassword(it.toCharArray()) }
+    private val redisUri = RedisURI.Builder.redis(credentials.host, credentials.port).apply {
+        if (credentials.ssl) {
+            withSsl(true)
+            if (credentials.allowSelfSignedInsecure) {
+                withVerifyPeer(false)
+            }
+        }
 
-        db?.takeIf { it >= 0 }?.let { withDatabase(it) }
+        credentials.username?.takeIf { it.isNotBlank() }?.let { withAuthentication(it, credentials.password?.toCharArray()) }
+            ?: credentials.password?.takeIf { it.isNotBlank() }?.let { withPassword(it.toCharArray()) }
+
+        credentials.db?.takeIf { it >= 0 }?.let { withDatabase(it) }
     }.build()
 
-    val redisClient: RedisClient = RedisClient.create(redisUri)
+    private val redisClient: RedisClient = RedisClient.create(redisUri).apply {
+        if (credentials.ssl) {
+            val sslOptions = when {
+                !credentials.trustStorePath.isNullOrBlank() -> {
+                    val ksType = if (credentials.trustStorePath.endsWith(".p12", ignoreCase = true) || credentials.trustStorePath.endsWith(".pfx", ignoreCase = true)) "PKCS12" else "JKS"
+                    val ks = KeyStore.getInstance(ksType)
+                    FileInputStream(credentials.trustStorePath).use { fis ->
+                        ks.load(fis, credentials.trustStorePassword?.toCharArray())
+                    }
+                    val tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
+                    tmf.init(ks)
+                    SslOptions.builder().jdkSslProvider().trustManager(tmf).build()
+                }
+                credentials.allowSelfSignedInsecure -> {
+                    SslOptions.builder().jdkSslProvider().trustManager(InsecureTrustManagerFactory.INSTANCE).build()
+                }
+                else -> {
+                    SslOptions.builder().jdkSslProvider().build()
+                }
+            }
+            val clientOptions = ClientOptions.builder().sslOptions(sslOptions).build()
+            options = clientOptions
+        }
+    }
+
     val connection: StatefulRedisConnection<String, String> = redisClient.connect()
 
     // Coroutine Commands
