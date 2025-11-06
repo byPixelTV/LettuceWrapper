@@ -10,9 +10,15 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
 abstract class RedisListener(
-    private val channels: List<String> = emptyList(),
+    channels: Any = emptyList<String>(),
     private val listenToAll: Boolean = false
 ) {
+
+    private val channels: List<String> = when (channels) {
+        is String -> listOf(channels)
+        is List<*> -> channels.filterIsInstance<String>()
+        else -> emptyList()
+    }
 
     init {
         registerListener(this)
