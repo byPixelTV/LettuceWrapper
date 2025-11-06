@@ -43,7 +43,7 @@ class LettuceRedisClient(
         credentials.db?.takeIf { it >= 0 }?.let { withDatabase(it) }
     }.build()
 
-    private val redisClient: RedisClient = RedisClient.create(redisUri).apply {
+    val redisClient: RedisClient = RedisClient.create(redisUri).apply {
         if (credentials.ssl) {
             val sslOptions = when {
                 !credentials.trustStorePath.isNullOrBlank() -> {
