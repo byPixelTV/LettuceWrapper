@@ -24,9 +24,7 @@ abstract class RedisListener(
         registerListener(this)
     }
 
-    fun unregister() {
-        unregisterListener(this)
-    }
+    fun unregister() = unregisterListener(this)
 
     companion object {
         private val listeners = mutableSetOf<RedisListener>()
@@ -39,7 +37,7 @@ abstract class RedisListener(
 
         private fun subscribeToAllChannels() {
             if (lettuceClient == null) {
-                throw IllegalStateException("LettuceRedisClient is not set. Please set it using RedisListener.setLettuceClient() before registering listeners.")
+                throw IllegalStateException("LettuceRedisClient is not set. Use RedisListener.setLettuceClient() first.")
             }
 
             if (!isSubscribed) {
@@ -50,7 +48,9 @@ abstract class RedisListener(
                     override fun message(channel: String, message: String) {
                         listeners.forEach { listener ->
                             if (listener.listenToAll || listener.channels.contains(channel)) {
-                                listenerScope.launch { listener.onMessage(channel, message) }
+                                listenerScope.launch {
+                                    listener.onMessage(message, channel)
+                                }
                             }
                         }
                     }
@@ -58,7 +58,9 @@ abstract class RedisListener(
                     override fun message(pattern: String, channel: String, message: String) {
                         listeners.forEach { listener ->
                             if (listener.listenToAll || listener.channels.contains(channel)) {
-                                listenerScope.launch { listener.onMessage(channel, message) }
+                                listenerScope.launch {
+                                    listener.onMessage(message, channel)
+                                }
                             }
                         }
                     }
@@ -91,9 +93,5 @@ abstract class RedisListener(
         }
     }
 
-    open fun onMessage(channel: String, message: String) {
-        onMessage(message)
-    }
-
-    abstract fun onMessage(message: String)
+    open fun onMessage(message: String, channel: String? = null) {}
 }
