@@ -9,7 +9,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
-abstract class RedisListener(protected val channel: String) {
+abstract class RedisListener(
+    private val channels: List<String> = emptyList(),
+    private val listenToAll: Boolean = false
+) {
 
     init {
         registerListener(this)
@@ -39,17 +42,19 @@ abstract class RedisListener(protected val channel: String) {
 
                 pubSubConnection.addListener(object : RedisPubSubListener<String, String> {
                     override fun message(channel: String, message: String) {
-                        listeners.filter { it.channel == channel }
-                            .forEach { listener ->
-                                listenerScope.launch { listener.onMessage(message) }
+                        listeners.forEach { listener ->
+                            if (listener.listenToAll || listener.channels.contains(channel)) {
+                                listenerScope.launch { listener.onMessage(channel, message) }
                             }
+                        }
                     }
 
                     override fun message(pattern: String, channel: String, message: String) {
-                        listeners.filter { it.channel == channel }
-                            .forEach { listener ->
-                                listenerScope.launch { listener.onMessage(message) }
+                        listeners.forEach { listener ->
+                            if (listener.listenToAll || listener.channels.contains(channel)) {
+                                listenerScope.launch { listener.onMessage(channel, message) }
                             }
+                        }
                     }
 
                     override fun subscribed(channel: String?, count: Long) {}
@@ -78,6 +83,10 @@ abstract class RedisListener(protected val channel: String) {
         fun setLettuceClient(client: LettuceRedisClient) {
             lettuceClient = client
         }
+    }
+
+    open fun onMessage(channel: String, message: String) {
+        onMessage(message)
     }
 
     abstract fun onMessage(message: String)
