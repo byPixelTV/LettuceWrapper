@@ -13,7 +13,6 @@ abstract class RedisListener(
     channels: Any = emptyList<String>(),
     private val listenToAll: Boolean = false
 ) {
-
     private val channels: List<String> = when (channels) {
         is String -> listOf(channels)
         is List<*> -> channels.filterIsInstance<String>()
@@ -36,9 +35,8 @@ abstract class RedisListener(
         private lateinit var pubSubCommands: RedisPubSubReactiveCommands<String, String>
 
         private fun subscribeToAllChannels() {
-            if (lettuceClient == null) {
-                throw IllegalStateException("LettuceRedisClient is not set. Use RedisListener.setLettuceClient() first.")
-            }
+            if (lettuceClient == null)
+                throw IllegalStateException("LettuceRedisClient not set. Use RedisListener.setLettuceClient() first.")
 
             if (!isSubscribed) {
                 pubSubConnection = lettuceClient!!.redisClient.connectPubSub()
@@ -48,9 +46,7 @@ abstract class RedisListener(
                     override fun message(channel: String, message: String) {
                         listeners.forEach { listener ->
                             if (listener.listenToAll || listener.channels.contains(channel)) {
-                                listenerScope.launch {
-                                    listener.onMessage(message, channel)
-                                }
+                                listenerScope.launch { listener.onMessage(channel, message) }
                             }
                         }
                     }
@@ -58,9 +54,7 @@ abstract class RedisListener(
                     override fun message(pattern: String, channel: String, message: String) {
                         listeners.forEach { listener ->
                             if (listener.listenToAll || listener.channels.contains(channel)) {
-                                listenerScope.launch {
-                                    listener.onMessage(message, channel)
-                                }
+                                listenerScope.launch { listener.onMessage(channel, message) }
                             }
                         }
                     }
@@ -71,10 +65,7 @@ abstract class RedisListener(
                     override fun punsubscribed(pattern: String?, count: Long) {}
                 })
 
-                listenerScope.launch {
-                    pubSubCommands.psubscribe("*").subscribe()
-                }
-
+                listenerScope.launch { pubSubCommands.psubscribe("*").subscribe() }
                 isSubscribed = true
             }
         }
@@ -84,14 +75,13 @@ abstract class RedisListener(
             subscribeToAllChannels()
         }
 
-        fun unregisterListener(listener: RedisListener) {
-            listeners.remove(listener)
-        }
-
-        fun setLettuceClient(client: LettuceRedisClient) {
-            lettuceClient = client
-        }
+        fun unregisterListener(listener: RedisListener) = listeners.remove(listener)
+        fun setLettuceClient(client: LettuceRedisClient) { lettuceClient = client }
     }
 
-    open fun onMessage(message: String, channel: String? = null) {}
+    open fun onMessage(channel: String, message: String) {
+        onMessage(message)
+    }
+
+    open fun onMessage(message: String) {}
 }
