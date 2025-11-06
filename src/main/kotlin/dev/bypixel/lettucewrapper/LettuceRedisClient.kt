@@ -71,6 +71,13 @@ class LettuceRedisClient(
         }
     }
 
+    @OptIn(ExperimentalLettuceCoroutinesApi::class)
+    fun sendPlainMessage(message: String, channel: String) {
+        coroutineScope.launch(Dispatchers.IO) {
+            connection.coroutines().publish(channel, message)
+        }
+    }
+
     suspend fun jsonDel(key: String, path: String = "."): Long = withContext(Dispatchers.IO) {
         connection.async().dispatch(
             CommandType.valueOf("JSON.DEL"),
