@@ -4,7 +4,8 @@
 
 <div align="center">
 
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/byPixelTV/LettuceWrapper/build_release.yml?branch=release&style=for-the-badge)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/byPixelTV/LettuceWrapper/build_release.yml?branch=release&style=for-the-badge&label=Release%20Build&logo=github)
+![GitHub Actions Workflow Status Snapshots](https://img.shields.io/github/actions/workflow/status/byPixelTV/LettuceWrapper/build_release.yml?branch=nightly&style=for-the-badge&label=Snapshot%20Build&logo=github)
 ![GitHub issues](https://img.shields.io/github/issues-raw/byPixelTV/lettucewrapper?style=for-the-badge)
 <br>
 [![CodeFactor](https://www.codefactor.io/repository/github/bypixeltv/lettucewrapper/badge)](https://www.codefactor.io/repository/github/bypixeltv/lettucewrapper)
