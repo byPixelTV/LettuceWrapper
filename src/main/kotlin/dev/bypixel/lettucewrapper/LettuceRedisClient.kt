@@ -1,5 +1,6 @@
 package dev.bypixel.lettucewrapper
 
+import dev.bypixel.lettucewrapper.listener.LettuceMessage
 import io.lettuce.core.*
 import io.lettuce.core.api.StatefulRedisConnection
 import io.lettuce.core.api.coroutines
@@ -19,6 +20,8 @@ import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.future.await
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
 import org.json.JSONObject
 import java.io.FileInputStream
 import java.security.KeyStore
@@ -97,6 +100,13 @@ class LettuceRedisClient(
     fun sendMessage(message: JSONObject, channel: String) {
         coroutineScope.launch(Dispatchers.IO) {
             connection.coroutines().publish(channel, message.toString())
+        }
+    }
+
+    @OptIn(ExperimentalLettuceCoroutinesApi::class)
+    fun sendLettuceMessage(data: LettuceMessage) {
+        coroutineScope.launch(Dispatchers.IO) {
+            connection.coroutines().publish(data.channel, Json.encodeToString(data))
         }
     }
 

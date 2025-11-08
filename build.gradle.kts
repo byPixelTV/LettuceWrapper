@@ -2,6 +2,7 @@ plugins {
     kotlin("jvm") version "2.2.21"
     id("maven-publish")
     id("signing")
+    kotlin("plugin.serialization") version "2.2.21"
 }
 
 
@@ -72,6 +73,7 @@ dependencies {
     compileOnly("org.json:json:20250517")
     compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
     compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.10.2")
+    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
 }
 
 
