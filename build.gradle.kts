@@ -66,14 +66,14 @@ repositories {
 }
 
 dependencies {
-    api("io.lettuce:lettuce-core:7.1.0.RELEASE") {
+    compileOnly("io.lettuce:lettuce-core:7.1.0.RELEASE") {
         exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-core")
         exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-reactive")
     }
-    api("org.json:json:20250517")
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.10.2")
-    api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
+    compileOnly("org.json:json:20250517")
+    compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+    compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.10.2")
+    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
 }
 
 
