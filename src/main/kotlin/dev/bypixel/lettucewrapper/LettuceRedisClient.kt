@@ -222,5 +222,6 @@ class LettuceRedisClient(
     suspend fun close() = withContext(Dispatchers.IO) {
         connection.close()
         redisClient.shutdown()
+        connectionPool.forEach { it.close() }
     }
 }
