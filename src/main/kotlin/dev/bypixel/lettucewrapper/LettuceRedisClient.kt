@@ -19,6 +19,8 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.future.await
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Semaphore
+import kotlinx.coroutines.sync.withPermit
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -26,10 +28,12 @@ import org.json.JSONObject
 import java.io.FileInputStream
 import java.security.KeyStore
 import javax.net.ssl.TrustManagerFactory
+import kotlin.math.max
 
 class LettuceRedisClient(
     credentials: RedisCredentials,
-    private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
+    private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default),
+    poolSize: Int = max(4, Runtime.getRuntime().availableProcessors() * 2)
 ) {
 
     private val redisUri = RedisURI.Builder.redis(credentials.host, credentials.port).apply {
@@ -66,12 +70,24 @@ class LettuceRedisClient(
                     SslOptions.builder().jdkSslProvider().build()
                 }
             }
-            val clientOptions = ClientOptions.builder().sslOptions(sslOptions).build()
+            val clientOptions = ClientOptions.builder()
+                .sslOptions(sslOptions)
+                .build()
             options = clientOptions
         }
     }
 
+    private val connectionPool = Array(poolSize) { redisClient.connect() }
+    private val semaphore = Semaphore(poolSize)
+
     val connection: StatefulRedisConnection<String, String> = redisClient.connect()
+
+    suspend fun <T> withConnection(block: suspend (StatefulRedisConnection<String, String>) -> T): T {
+        return semaphore.withPermit {
+            val conn = connectionPool.random()
+            block(conn)
+        }
+    }
 
     // Coroutine Commands
     @OptIn(ExperimentalLettuceCoroutinesApi::class)
