@@ -75,6 +75,11 @@ class LettuceRedisClient(
                 .publishOnScheduler(false)
                 .build()
             options = clientOptions
+        } else {
+            val clientOptions = ClientOptions.builder()
+                .publishOnScheduler(false)
+                .build()
+            options = clientOptions
         }
     }
 
