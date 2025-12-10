@@ -72,6 +72,7 @@ class LettuceRedisClient(
             }
             val clientOptions = ClientOptions.builder()
                 .sslOptions(sslOptions)
+                .publishOnScheduler(false)
                 .build()
             options = clientOptions
         }
