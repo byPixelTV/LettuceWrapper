@@ -32,7 +32,7 @@ import kotlin.math.max
 
 class LettuceRedisClient(
     credentials: RedisCredentials,
-    private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default),
+    val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default),
     poolSize: Int = max(4, Runtime.getRuntime().availableProcessors() * 2)
 ) {
 
@@ -126,9 +126,12 @@ class LettuceRedisClient(
     }
 
     @OptIn(ExperimentalLettuceCoroutinesApi::class)
-    fun sendLettuceMessage(data: LettuceMessage) {
+    inline fun <reified T : LettuceMessage> sendLettuceMessage(data: T) {
         coroutineScope.launch(Dispatchers.IO) {
-            connection.coroutines().publish(data.channel, Json.encodeToString(data))
+            connection.coroutines().publish(
+                data.channel,
+                Json.encodeToString(data)
+            )
         }
     }
 
