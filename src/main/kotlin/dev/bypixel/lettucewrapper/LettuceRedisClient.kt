@@ -72,12 +72,12 @@ class LettuceRedisClient(
             }
             val clientOptions = ClientOptions.builder()
                 .sslOptions(sslOptions)
-                .publishOnScheduler(false)
+                .maintNotificationsConfig(MaintNotificationsConfig.builder().enableMaintNotifications(false).build())
                 .build()
             options = clientOptions
         } else {
             val clientOptions = ClientOptions.builder()
-                .publishOnScheduler(false)
+                .maintNotificationsConfig(MaintNotificationsConfig.builder().enableMaintNotifications(false).build())
                 .build()
             options = clientOptions
         }
