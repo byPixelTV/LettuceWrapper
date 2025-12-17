@@ -27,6 +27,7 @@ import kotlinx.serialization.json.Json
 import org.json.JSONObject
 import java.io.FileInputStream
 import java.security.KeyStore
+import java.time.Duration
 import javax.net.ssl.TrustManagerFactory
 import kotlin.math.max
 
@@ -48,6 +49,7 @@ class LettuceRedisClient(
             ?: credentials.password?.takeIf { it.isNotBlank() }?.let { withPassword(it.toCharArray()) }
 
         credentials.db?.takeIf { it >= 0 }?.let { withDatabase(it) }
+        withTimeout(Duration.ofMillis(credentials.timeoutMillis))
     }.build()
 
     val redisClient: RedisClient = RedisClient.create(redisUri).apply {

@@ -9,7 +9,8 @@ data class RedisCredentials(
     val ssl: Boolean = false,
     val allowSelfSignedInsecure: Boolean = false,
     val trustStorePath: String? = null,
-    val trustStorePassword: String? = null
+    val trustStorePassword: String? = null,
+    val timeoutMillis: Long = 2000
 ) {
     fun createUrl(): String {
         require(host.isNotBlank()) { "Host cannot be empty." }
