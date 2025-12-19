@@ -3,7 +3,9 @@ package dev.bypixel.lettucewrapper
 import dev.bypixel.lettucewrapper.listener.LettuceMessage
 import io.lettuce.core.*
 import io.lettuce.core.api.StatefulRedisConnection
+import io.lettuce.core.api.async.RedisAsyncCommands
 import io.lettuce.core.api.coroutines
+import io.lettuce.core.api.coroutines.RedisCoroutinesCommands
 import io.lettuce.core.api.sync.RedisCommands
 import io.lettuce.core.codec.StringCodec
 import io.lettuce.core.output.IntegerOutput
@@ -28,6 +30,7 @@ import org.json.JSONObject
 import java.io.FileInputStream
 import java.security.KeyStore
 import java.time.Duration
+import java.util.concurrent.atomic.AtomicInteger
 import javax.net.ssl.TrustManagerFactory
 import kotlin.math.max
 
@@ -85,17 +88,29 @@ class LettuceRedisClient(
         }
     }
 
-    private val connectionPool = Array(poolSize) { redisClient.connect() }
-    private val semaphore = Semaphore(poolSize)
+    private val pool = Array(poolSize) {
+        redisClient.connect(StringCodec.UTF8)
+    }
+
+    private val poolIndex = AtomicInteger(0)
+
+    fun nextConnection(): StatefulRedisConnection<String, String> =
+        pool[poolIndex.getAndIncrement() % pool.size]
 
     val connection: StatefulRedisConnection<String, String> = redisClient.connect()
 
-    suspend fun <T> withConnection(block: suspend (StatefulRedisConnection<String, String>) -> T): T {
-        return semaphore.withPermit {
-            val conn = connectionPool.random()
-            block(conn)
-        }
-    }
+    suspend inline fun <T> withAsync(
+        crossinline block: suspend (RedisAsyncCommands<String, String>) -> T
+    ): T = block(nextConnection().async())
+
+    @OptIn(ExperimentalLettuceCoroutinesApi::class)
+    suspend inline fun <T> withCoroutines(
+        crossinline block: suspend (RedisCoroutinesCommands<String, String>) -> T
+    ): T = block(nextConnection().coroutines())
+
+    inline fun <T> withSync(
+        block: (RedisCommands<String, String>) -> T
+    ): T = block(nextConnection().sync())
 
     // Coroutine Commands
     @OptIn(ExperimentalLettuceCoroutinesApi::class)
@@ -231,14 +246,7 @@ class LettuceRedisClient(
     }
 
     suspend fun close() = withContext(Dispatchers.IO) {
-        if (connection.isOpen) {
-            connection.close()
-        }
+        pool.forEach { if (it.isOpen) it.close() }
         redisClient.shutdown()
-        connectionPool.forEach {
-            if (it.isOpen) {
-                it.close()
-            }
-        }
     }
 }
