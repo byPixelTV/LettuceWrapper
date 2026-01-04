@@ -24,7 +24,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import org.json.JSONObject
 import java.io.FileInputStream
@@ -98,6 +97,48 @@ class LettuceRedisClient(
         pool[poolIndex.getAndIncrement() % pool.size]
 
     val connection: StatefulRedisConnection<String, String> = redisClient.connect()
+
+    suspend fun reconnectAll() = withContext(Dispatchers.IO) {
+        val semaphore = Semaphore(pool.size)
+        coroutineScope.launch {
+            pool.forEach { conn ->
+                launch {
+                    semaphore.withPermit {
+                        if (conn.isOpen) {
+                            conn.close()
+                        }
+                        val newConn = redisClient.connect(StringCodec.UTF8)
+                        val index = pool.indexOf(conn)
+                        pool[index] = newConn
+                    }
+                }
+            }
+        }.join()
+    }
+
+    suspend fun checkConnectionErrors(): List<Throwable> = withContext(Dispatchers.IO) {
+        val errors = mutableListOf<Throwable>()
+        val semaphore = Semaphore(pool.size)
+        coroutineScope.launch {
+            pool.forEach { conn ->
+                launch {
+                    semaphore.withPermit {
+                        if (!conn.isOpen) {
+                            errors.add(Exception("Connection is closed"))
+                        } else {
+                            val pingCommand = conn.async().ping()
+                            try {
+                                pingCommand.await()
+                            } catch (e: Exception) {
+                                errors.add(e)
+                            }
+                        }
+                    }
+                }
+            }
+        }.join()
+        errors
+    }
 
     suspend inline fun <T> withAsync(
         crossinline block: suspend (RedisAsyncCommands<String, String>) -> T
