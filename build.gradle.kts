@@ -1,7 +1,6 @@
 plugins {
     kotlin("jvm") version "2.3.10"
     id("maven-publish")
-    id("signing")
     kotlin("plugin.serialization") version "2.3.10"
 }
 
@@ -50,14 +49,14 @@ fun getLatestTag(): String {
             // no tag → default to 1.0.0 + commit
             "1.0.0+$commit"
         }
-    } catch (e: Exception) {
+    } catch (_: Exception) {
         return "unknown"
     }
 }
 
 val versionString = getLatestTag()
 
-group = "dev.bypixel"
+group = "com.github.bypixeltv"
 version = versionString
 
 
@@ -66,45 +65,26 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.lettuce:lettuce-core:7.3.0.RELEASE") {
-        exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-core")
-        exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-reactive")
-    }
-    compileOnly("org.json:json:20250517")
-    compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
-    compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.10.2")
-    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.10.0")
+    api("io.lettuce:lettuce-core:7.3.0.RELEASE")
+    api("org.json:json:20250517")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.10.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.10.0")
 }
 
-
 publishing {
-    repositories {
-        maven {
-            name = "bypixelReleases"
-            url = uri("https://repo.bypixel.dev/releases/")
-            credentials{
-                username = findProperty("bypixelRepoUser").toString()
-                password = findProperty("bypixelRepoToken").toString()
-            }
-        }
-
-        maven {
-            name = "bypixelSnapshots"
-            url = uri("https://repo.bypixel.dev/snapshots/")
-            credentials{
-                username = findProperty("bypixelRepoUser").toString()
-                password = findProperty("bypixelRepoToken").toString()
-            }
-        }
-    }
     publications {
         create<MavenPublication>("maven") {
-            groupId = rootProject.group.toString()
+            from(components["java"])
             artifactId = project.name
-            version = rootProject.version.toString()
-            from(project.components["java"])
         }
     }
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
 }
 
 kotlin {
