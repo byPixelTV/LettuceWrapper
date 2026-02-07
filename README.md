@@ -33,12 +33,6 @@
 </div>
 <hr>
 
-<div>
-
-> # 💻 Development Builds 🌐:
-> - **Development  Builds:** https://github.com/byPixelTV/LettuceWrapper/actions
-</div>
-
 <div align="center">
     <h3 align="center">Uses modern technology 🚀</h3>
   <img src="https://cdn.bypixel.dev/raw/QhWGzB.png" height="64" alt="kotlin" />
@@ -55,33 +49,22 @@
 > Release:
 > ```kotlin
 > maven {
->     name = "bypixelRepoReleases"
->     url = uri("https://repo.bypixel.dev/releases")
-> }
-> ```
-> Snapshot:
-> ```kotlin
-> maven {
->     name = "bypixelRepoSnapshots"
->     url = uri("https://repo.bypixel.dev/snapshots")
+>     name = "jitpack"
+>     url = uri("https://jitpack.io/")
 > }
 > ```
 > 2. Add the dependency and Lettuce to your build file:
 >
 > LettuceWrapper: 
 > 
-> [![Latest Version](https://repo.bypixel.dev/api/badge/latest/releases/dev/bypixel/LettuceWrapper?color=40c14a&name=LettuceWrapper-Release)](https://repo.bypixel.dev/#/releases/dev/bypixel/LettuceWrapper)
-> 
-> [![Snapshot Version](https://repo.bypixel.dev/api/badge/latest/snapshots/dev/bypixel/LettuceWrapper?color=40c14a&name=LettuceWrapper-Snapshot)](https://repo.bypixel.dev/#/snapshots/dev/bypixel/LettuceWrapper)
+> [![](https://jitpack.io/v/byPixelTV/LettuceWrapper.svg)](https://jitpack.io/#byPixelTV/LettuceWrapper)
+> [![](https://img.shields.io/badge/Snapshot-nightly--SNAPSHOT-blue)](https://jitpack.io/#byPixelTV/LettuceWrapper)
+>
 > 
 > Lettuce:
 > 
 > [![Maven Central](https://img.shields.io/maven-central/v/io.lettuce/lettuce-core?versionSuffix=RELEASE&logo=redis
 )](https://maven-badges.herokuapp.com/maven-central/io.lettuce/lettuce-core)
-> 
-> JSON
->
-> [![Maven Central](https://img.shields.io/maven-central/v/org.json/json.svg?logo=json)](https://mvnrepository.com/artifact/org.json/json)
 > 
 > KotlinX:
 >
@@ -90,8 +73,8 @@
 > ```kotlin
 > dependencies {
 >    implementation("dev.bypixel:LettuceWrapper:VERSION")
->    implementation("io.lettuce:lettuce-core:VERSION")
->    implementation("org.json:json:VERSION")
+> 
+>    // optional
 >    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:VERSION")
 >    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:VERSION")
 > }

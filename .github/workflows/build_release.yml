@@ -68,6 +68,12 @@ jobs:
           name: jars
           path: build/libs/*.jar
 
+      - name: Normalize tag
+        id: normalize
+        run: |
+          TAG="${{ steps.version.outputs.new_tag }}"
+          echo "tag=${TAG#v}" >> $GITHUB_OUTPUT
+
       - name: Generate changelog
         if: github.ref == 'refs/heads/release' && steps.check_commits.outputs.no_new_commits != 'true'
         env:
@@ -75,7 +81,7 @@ jobs:
         run: |
           PREV_TAG=${{ steps.check_commits.outputs.last_tag }}
           CURR_TAG=${{ steps.version.outputs.new_tag }}
-
+          
           git log ${PREV_TAG}..HEAD --pretty=format:"- %s (%h)" > RELEASE_NOTES.md
           echo "" >> RELEASE_NOTES.md
           echo "**Full Changelog:** https://github.com/${{ github.repository }}/compare/${PREV_TAG}...${CURR_TAG}" >> RELEASE_NOTES.md
@@ -84,7 +90,7 @@ jobs:
         if: github.ref == 'refs/heads/release' && steps.check_commits.outputs.no_new_commits != 'true'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ steps.version.outputs.new_tag }}
-          name: "LettuceWrapper ${{ steps.version.outputs.new_tag }}"
+          tag_name: ${{ steps.normalize.outputs.tag }}
+          name: "LettuceWrapper v${{ steps.normalize.outputs.tag }}"
           body_path: RELEASE_NOTES.md
           files: build/libs/*.jar
