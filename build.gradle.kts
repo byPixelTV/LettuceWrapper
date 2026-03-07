@@ -65,7 +65,7 @@ repositories {
 }
 
 dependencies {
-    api("io.lettuce:lettuce-core:7.4.0.RELEASE")
+    api("io.lettuce:lettuce-core:7.5.0.RELEASE")
     api("org.json:json:20250517")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
