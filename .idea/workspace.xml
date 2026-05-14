@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1e32ef58-f5b3-4d14-9523-aabd77d73e1f" name="Changes" comment="chore: update ci/cd process" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotChats">
+    <option name="panelChat">
+      <chat>
+        <option name="activeSessionId" value="6a63ba1f-0769-4d95-bee9-9443069c7bbc" />
+        <option name="sessions">
+          <session>
+            <option name="chatType" value="PANEL" />
+            <option name="id" value="6a63ba1f-0769-4d95-bee9-9443069c7bbc" />
+            <option name="modeId" value="Agent" />
+            <option name="modelType" value="builtin_family" />
+            <option name="modelValue" value="auto" />
+            <option name="targetType" value="LOCAL" />
+          </session>
+        </option>
+        <option name="type" value="PANEL" />
+      </chat>
+    </option>
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_D:/Dev/Java/LettuceWrapper" value="32fFp47K7qCsBkBPBb4okn7ZBXa" />
+    </persistenceIdMap>
+  </component>
+  <component name="CopilotUserSelectedModel">
+    <selectedModels>
+      <entry key="chat-panel" value="Claude Sonnet 4.5" />
+      <entry key="agent-panel" value="Claude Sonnet 4.5" />
+      <entry key="edit-panel" value="GPT-5 mini" />
+    </selectedModels>
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="29" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="LettuceWrapper" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="LettuceWrapper" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="LettuceWrapper" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="LettuceWrapper" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="publishing" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Object" />
+        <option value="Kotlin Class" />
+        <option value="Kotlin Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="nightly" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;byPixelTV&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/byPixelTV/LettuceWrapper.git&quot;,
+    &quot;accountId&quot;: &quot;23ea56c1-8ad4-454e-8a5d-0d899536400d&quot;
+  }
+}</component>
+  <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$" gradleHome="D:\Dev\Java\.gradle\wrapper\dists\gradle-9.3.1-bin\23ovyewtku6u96viwx3xl3oks\gradle-9.3.1" javaHome="C:\Users\lukas\.jdks\jbrsdk_jcef-21.0.9" gradleVersion="9.3.1" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="32fFp47K7qCsBkBPBb4okn7ZBXa" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LettuceWrapper [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LettuceWrapper [publishMavenPublicationToBypixelReleasesRepository].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;nightly&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Dev/Java/LettuceWrapper&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager" selected="Gradle.LettuceWrapper [build]">
+    <configuration name="LettuceWrapper [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="LettuceWrapper [publishMavenPublicationToBypixelReleasesRepository]" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="env">
+          <map>
+            <entry key="REPO_PASSWORD" value="CpqdiHRBL+gLWpmc2lYUC64vbryGEvI9NDg7sOR8T77MTQz7iN0oZEnhsAkbdHXa" />
+            <entry key="REPO_USERNAME" value="lettucewrapper" />
+          </map>
+        </option>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="publishMavenPublicationToBypixelReleasesRepository" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="LettuceWrapper [publishMavenPublicationToBypixelSnapshotsRepository]" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="env">
+          <map>
+            <entry key="REPO_PASSWORD" value="CpqdiHRBL+gLWpmc2lYUC64vbryGEvI9NDg7sOR8T77MTQz7iN0oZEnhsAkbdHXa" />
+            <entry key="REPO_USERNAME" value="lettucewrapper" />
+          </map>
+        </option>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="publishMavenPublicationToBypixelSnapshotsRepository" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.LettuceWrapper [build]" />
+        <item itemvalue="Gradle.LettuceWrapper [build]" />
+        <item itemvalue="Gradle.LettuceWrapper [build]" />
+        <item itemvalue="Gradle.LettuceWrapper [build]" />
+        <item itemvalue="Gradle.LettuceWrapper [build]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.30387.90" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.30387.90" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1e32ef58-f5b3-4d14-9523-aabd77d73e1f" name="Changes" comment="" />
+      <created>1725090504638</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1725090504638</updated>
+      <workItem from="1757803901659" duration="2074000" />
+      <workItem from="1761156677469" duration="4784000" />
+      <workItem from="1761164943609" duration="388000" />
+      <workItem from="1761393467880" duration="615000" />
+      <workItem from="1761395482182" duration="1497000" />
+      <workItem from="1761420379134" duration="724000" />
+      <workItem from="1761595780635" duration="232000" />
+      <workItem from="1761827314860" duration="45000" />
+      <workItem from="1762418457347" duration="933000" />
+      <workItem from="1762420627637" duration="75000" />
+      <workItem from="1762424096101" duration="977000" />
+      <workItem from="1762440881769" duration="2059000" />
+      <workItem from="1762509000335" duration="912000" />
+      <workItem from="1762546455684" duration="364000" />
+      <workItem from="1762565848760" duration="73000" />
+      <workItem from="1762603763044" duration="1854000" />
+      <workItem from="1762972326204" duration="13000" />
+      <workItem from="1763035790782" duration="165000" />
+      <workItem from="1763042333844" duration="59000" />
+      <workItem from="1763117273675" duration="559000" />
+      <workItem from="1763118529517" duration="22000" />
+      <workItem from="1763295889639" duration="716000" />
+      <workItem from="1763827482134" duration="435000" />
+      <workItem from="1763828553595" duration="754000" />
+      <workItem from="1765029767583" duration="382000" />
+      <workItem from="1765031798225" duration="2602000" />
+      <workItem from="1765118443389" duration="156000" />
+      <workItem from="1765396126481" duration="836000" />
+      <workItem from="1765397207256" duration="1084000" />
+      <workItem from="1765407076344" duration="809000" />
+      <workItem from="1765629373454" duration="4038000" />
+      <workItem from="1765976210127" duration="2081000" />
+      <workItem from="1766177463353" duration="1842000" />
+      <workItem from="1767529692098" duration="1559000" />
+      <workItem from="1767956946105" duration="18000" />
+      <workItem from="1769183221597" duration="437000" />
+      <workItem from="1769251421102" duration="18000" />
+      <workItem from="1770385566570" duration="3294000" />
+      <workItem from="1770463007949" duration="1112000" />
+      <workItem from="1777108072542" duration="170000" />
+      <workItem from="1778686143230" duration="1450000" />
+      <workItem from="1778767630742" duration="15000" />
+    </task>
+    <task id="LOCAL-00001" summary="feat: add license, ci/cd pipeline and readme">
+      <option name="closed" value="true" />
+      <created>1761159772208</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1761159772208</updated>
+    </task>
+    <task id="LOCAL-00002" summary="fix: ci now uses normal build instead of non existing shadowJar">
+      <option name="closed" value="true" />
+      <created>1761159812315</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1761159812315</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fix: multiple edge cases led to weird build issues when having no tags">
+      <option name="closed" value="true" />
+      <created>1761160541148</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1761160541148</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fix: maven publish used the wrong command because it was copied from a private project">
+      <option name="closed" value="true" />
+      <created>1761160627301</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1761160627301</updated>
+    </task>
+    <task id="LOCAL-00005" summary="[ci skip] fix: readme used the wrong url for snapshots badge">
+      <option name="closed" value="true" />
+      <created>1761160745446</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1761160745446</updated>
+    </task>
+    <task id="LOCAL-00006" summary="chore: remove sendCustomMessage function because sendMessage is the better option">
+      <option name="closed" value="true" />
+      <created>1761160901957</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1761160901958</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fix: release publish used wrong credentials">
+      <option name="closed" value="true" />
+      <created>1761161048047</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1761161048047</updated>
+    </task>
+    <task id="LOCAL-00008" summary="fix: release publish did not set the maven repo credentials">
+      <option name="closed" value="true" />
+      <created>1761161240326</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1761161240326</updated>
+    </task>
+    <task id="LOCAL-00009" summary="[ci skip] fix: ci badge used wrong file name">
+      <option name="closed" value="true" />
+      <created>1761161338746</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1761161338746</updated>
+    </task>
+    <task id="LOCAL-00010" summary="feat: add support for setting database and username">
+      <option name="closed" value="true" />
+      <created>1761165049036</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1761165049036</updated>
+    </task>
+    <task id="LOCAL-00011" summary="fix: dependencies were marked as implementation, but compileOnly was needed">
+      <option name="closed" value="true" />
+      <created>1761395670071</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1761395670071</updated>
+    </task>
+    <task id="LOCAL-00012" summary="feat(redis listener): add the option to listen to all channels and get the channel in the onMessage method">
+      <option name="closed" value="true" />
+      <created>1762418792924</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1762418792924</updated>
+    </task>
+    <task id="LOCAL-00013" summary="fix(redis listener): remove breaking change to require a list of channels">
+      <option name="closed" value="true" />
+      <created>1762418922194</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1762418922194</updated>
+    </task>
+    <task id="LOCAL-00014" summary="[ci skip] fix(readme): click url of snapshot badge was pointing to releases page">
+      <option name="closed" value="true" />
+      <created>1762419266062</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1762419266062</updated>
+    </task>
+    <task id="LOCAL-00015" summary="feat(client): add sendPlainMessage method for sending messages with only text">
+      <option name="closed" value="true" />
+      <created>1762420673549</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1762420673549</updated>
+    </task>
+    <task id="LOCAL-00016" summary="chore(redis listener): there is only one onMessage method now with an optional channel param">
+      <option name="closed" value="true" />
+      <created>1762424513286</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1762424513286</updated>
+    </task>
+    <task id="LOCAL-00017" summary="chore(redis listener): trying to solve that you only need one override">
+      <option name="closed" value="true" />
+      <created>1762424891015</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1762424891015</updated>
+    </task>
+    <task id="LOCAL-00018" summary="feat(credentials): add helper methods for creating redis credentials, use in client">
+      <option name="closed" value="true" />
+      <created>1762443240314</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1762443240314</updated>
+    </task>
+    <task id="LOCAL-00019" summary="fix: compile error">
+      <option name="closed" value="true" />
+      <created>1762443434822</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1762443434822</updated>
+    </task>
+    <task id="LOCAL-00020" summary="[ci skip] chore: add snapshot build status badge to readme">
+      <option name="closed" value="true" />
+      <created>1762565892908</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1762565892908</updated>
+    </task>
+    <task id="LOCAL-00021" summary="feat: add lettucemessages to make sending stuff easier">
+      <option name="closed" value="true" />
+      <created>1762604767098</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1762604767098</updated>
+    </task>
+    <task id="LOCAL-00022" summary="fix: use api() for dependencies instead of compileOnly()">
+      <option name="closed" value="true" />
+      <created>1763296008926</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1763296008926</updated>
+    </task>
+    <task id="LOCAL-00023" summary="fix(revert): use compileOnly() for dependencies instead of api()">
+      <option name="closed" value="true" />
+      <created>1763827682258</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1763827682258</updated>
+    </task>
+    <task id="LOCAL-00024" summary="feat: introduce better parallel functionality">
+      <option name="closed" value="true" />
+      <created>1765029961944</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1765029961944</updated>
+    </task>
+    <task id="LOCAL-00025" summary="fix: redis pool wasn't shutdown correctly">
+      <option name="closed" value="true" />
+      <created>1765031948137</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1765031948137</updated>
+    </task>
+    <task id="LOCAL-00026" summary="fix: a warning was thrown for maintenance events, this should now be removed">
+      <option name="closed" value="true" />
+      <created>1765396301750</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1765396301751</updated>
+    </task>
+    <task id="LOCAL-00027" summary="fix: the warning was only gone if you enabled ssl">
+      <option name="closed" value="true" />
+      <created>1765396914453</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1765396914453</updated>
+    </task>
+    <task id="LOCAL-00028" summary="fix: only close connections if they are open">
+      <option name="closed" value="true" />
+      <created>1765407128439</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1765407128440</updated>
+    </task>
+    <task id="LOCAL-00029" summary="fix: remove maintenance event message">
+      <option name="closed" value="true" />
+      <created>1765629492704</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1765629492704</updated>
+    </task>
+    <task id="LOCAL-00030" summary="feat: add the option to set the timeout millis in RedisCredentials">
+      <option name="closed" value="true" />
+      <created>1765995684792</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1765995684792</updated>
+    </task>
+    <task id="LOCAL-00031" summary="feat: better parallel redis connections">
+      <option name="closed" value="true" />
+      <created>1766179036473</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1766179036473</updated>
+    </task>
+    <task id="LOCAL-00032" summary="feat: add methods to check if there are connection errors and to reconnect all connections">
+      <option name="closed" value="true" />
+      <created>1767529968669</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1767529968669</updated>
+    </task>
+    <task id="LOCAL-00033" summary="chore: use connection pool in internal helpers">
+      <option name="closed" value="true" />
+      <created>1769183539620</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1769183539620</updated>
+    </task>
+    <task id="LOCAL-00034" summary="chore: use jitpack for lettuce-wrapper">
+      <option name="closed" value="true" />
+      <created>1770386536769</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1770386536769</updated>
+    </task>
+    <task id="LOCAL-00035" summary="chore: update ci/cd process">
+      <option name="closed" value="true" />
+      <created>1770463449873</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1770463449873</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat(redis listener): add the option to listen to all channels and get the channel in the onMessage method" />
+    <MESSAGE value="fix(redis listener): remove breaking change to require a list of channels in redis listener" />
+    <MESSAGE value="fix(redis listener): remove breaking change to require a list of channels" />
+    <MESSAGE value="[ci skip] fix(readme): click url of snapshot badge was pointing to releases page" />
+    <MESSAGE value="feat(client): add sendPlainMessage method for sending messages with only text" />
+    <MESSAGE value="chore(redis listener): there is only one onMessage method now with an optional channel param" />
+    <MESSAGE value="chore(redis listener): trying to solve that you only need one override" />
+    <MESSAGE value="feat(credentials): add helper methods for creating redis credentials, use in client" />
+    <MESSAGE value="fix: compile error" />
+    <MESSAGE value="[ci skip] chore: add snapshot build status badge to readme" />
+    <MESSAGE value="feat: add lettucemessages to make sending stuff easier" />
+    <MESSAGE value="fix: use api() for dependencies instead of compileOnly()" />
+    <MESSAGE value="fix(revert): use compileOnly() for dependencies instead of api()" />
+    <MESSAGE value="feat: introduce better parallel functionality" />
+    <MESSAGE value="fix: redis pool wasn't shutdown correctly" />
+    <MESSAGE value="fix: a warning was thrown for maintenance events, this should now be removed" />
+    <MESSAGE value="fix: the warning was only gone if you enabled ssl" />
+    <MESSAGE value="fix: only close connections if they are open" />
+    <MESSAGE value="fix: remove maintenance event message" />
+    <MESSAGE value="feat: add the option to set the timeout millis in RedisCredentials" />
+    <MESSAGE value="feat: better parallel redis connections" />
+    <MESSAGE value="feat: add methods to check if there are connection errors and to reconnect all connections" />
+    <MESSAGE value="chore: use connection pool in internal helpers" />
+    <MESSAGE value="chore: use jitpack for lettuce-wrapper" />
+    <MESSAGE value="chore: update ci/cd process" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: update ci/cd process" />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>
