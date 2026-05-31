@@ -195,13 +195,13 @@ jobs:
 
       - name: Download release notes
         if: github.ref == 'refs/heads/release'
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: release-notes
 
       - name: Create GitHub Release
         if: github.ref == 'refs/heads/release'
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ steps.version.outputs.release_tag }}
           name: ${{ steps.version.outputs.release_tag }}
