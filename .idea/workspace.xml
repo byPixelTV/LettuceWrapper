@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e32ef58-f5b3-4d14-9523-aabd77d73e1f" name="Changes" comment="fix: update kotlinx serialization" />
+    <list default="true" id="1e32ef58-f5b3-4d14-9523-aabd77d73e1f" name="Changes" comment="fix: release versioning">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/build_release.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/build_release.yml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -587,14 +589,21 @@
       <option name="project" value="LOCAL" />
       <updated>1780242403816</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="fix: release versioning">
+      <option name="closed" value="true" />
+      <created>1780243887132</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1780243887132</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix(redis listener): remove breaking change to require a list of channels" />
     <MESSAGE value="[ci skip] fix(readme): click url of snapshot badge was pointing to releases page" />
     <MESSAGE value="feat(client): add sendPlainMessage method for sending messages with only text" />
     <MESSAGE value="chore(redis listener): there is only one onMessage method now with an optional channel param" />
@@ -619,7 +628,8 @@
     <MESSAGE value="chore: update ci/cd process" />
     <MESSAGE value="fix: update kotlinx serialization" />
     <MESSAGE value="fix: versioning is broken" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: versioning is broken" />
+    <MESSAGE value="fix: release versioning" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: release versioning" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

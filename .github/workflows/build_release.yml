@@ -170,9 +170,6 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: Build Gradle project
-        run: ./gradlew build
-
       - name: Publish Kotlin SDK (release)
         if: github.ref == 'refs/heads/release'
         run: |
