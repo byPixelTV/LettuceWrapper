@@ -1,4 +1,4 @@
-name: Build & Release (JitPack compatible)
+name: Build & Release
 
 permissions:
   contents: write
@@ -192,3 +192,20 @@ jobs:
         env:
           bypixelRepoUser: ${{ secrets.BYPIXEL_REPO_USER }}
           bypixelRepoToken: ${{ secrets.BYPIXEL_REPO_TOKEN }}
+
+      - name: Download release notes
+        if: github.ref == 'refs/heads/release'
+        uses: actions/download-artifact@v7
+        with:
+          name: release-notes
+
+      - name: Create GitHub Release
+        if: github.ref == 'refs/heads/release'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.release_tag }}
+          name: ${{ steps.version.outputs.release_tag }}
+          body_path: RELEASE_NOTES.md
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
