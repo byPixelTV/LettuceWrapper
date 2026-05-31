@@ -1,63 +1,108 @@
+import java.io.ByteArrayOutputStream
+
 plugins {
     kotlin("jvm") version "2.3.21"
     id("maven-publish")
     kotlin("plugin.serialization") version "2.3.21"
 }
 
-
-fun getLatestTag(): String {
-    try {
-        // Fetch all tags
-        ProcessBuilder("git", "fetch", "--tags")
-            .redirectErrorStream(true)
-            .start()
-            .apply {
-                inputStream.bufferedReader().use { it.readText() }
-                waitFor()
-            }
-
-        val branch = ProcessBuilder("git", "rev-parse", "--abbrev-ref", "HEAD")
-            .redirectErrorStream(true)
-            .start()
-            .inputStream
-            .bufferedReader()
-            .use { it.readText().trim() }
-
-        // Try to get latest tag
-        val tagProcess = ProcessBuilder("git", "describe", "--tags", "--abbrev=0")
-            .redirectErrorStream(true)
-            .start()
-        val rawTag = tagProcess.inputStream.bufferedReader().use { it.readText().trim() }
-        tagProcess.waitFor()
-
-        val hasTag = rawTag.isNotEmpty() && !rawTag.startsWith("fatal:")
-
-        // Always get commit hash (works even if no tag)
-        val commitProcess = ProcessBuilder("git", "rev-parse", "--short", "HEAD")
-            .redirectErrorStream(true)
-            .start()
-        val commit = commitProcess.inputStream.bufferedReader().use { it.readText().trim() }
-        commitProcess.waitFor()
-
-        // If no commit found (super rare, empty repo)
-        if (commit.isEmpty()) return "unknown"
-
-        return if (hasTag) {
-            val tag = rawTag.removePrefix("v")
-            if (branch == "release") tag else "$tag+$commit"
+fun runGit(vararg args: String): String? {
+    return try {
+        val output = ByteArrayOutputStream()
+        val process = Runtime.getRuntime().exec(arrayOf("git", *args))
+        val exit = process.waitFor()
+        if (exit == 0) {
+            process.inputStream.copyTo(output)
+            output.toString().trim().ifEmpty { null }
         } else {
-            // no tag → default to 1.0.0 + commit
-            "1.0.0+$commit"
+            null
         }
     } catch (_: Exception) {
-        return "unknown"
+        null
     }
 }
 
-val versionString = getLatestTag()
+fun getGitBranch(): String {
+    return try {
+        val output = ByteArrayOutputStream()
+        Runtime.getRuntime().exec(arrayOf("git", "rev-parse", "--abbrev-ref", "HEAD")).apply {
+            waitFor()
+            inputStream.copyTo(output)
+        }
+        output.toString().trim()
+    } catch (_: Exception) {
+        "unknown-branch"
+    }
+}
 
-group = "com.github.bypixeltv"
-version = versionString
+fun getCurrentGitCommit(): String {
+    return try {
+        val output = ByteArrayOutputStream()
+        Runtime.getRuntime().exec(arrayOf("git", "rev-parse", "--short", "HEAD")).apply {
+            waitFor()
+            inputStream.copyTo(output)
+        }
+        output.toString().trim()
+    } catch (_: Exception) {
+        "unknown-commit"
+    }
+}
+
+fun latestReleaseTagOrDefault(defaultTag: String = "v0.0.0"): String {
+    val releaseTagPattern = Regex("""^v\d+\.\d+\.\d+$""")
+    val tags = runGit("tag", "--list", "v[0-9]*.[0-9]*.[0-9]*", "--sort=-v:refname")
+        ?.lineSequence()
+        ?.map { it.trim() }
+        ?.filter { it.isNotEmpty() }
+        ?: emptySequence()
+
+    return tags.firstOrNull { releaseTagPattern.matches(it) } ?: defaultTag
+}
+
+fun parseReleaseTag(tag: String): Triple<Int, Int, Int>? {
+    val match = Regex("""^v(\d+)\.(\d+)\.(\d+)$""").matchEntire(tag) ?: return null
+    return Triple(
+        match.groupValues[1].toInt(),
+        match.groupValues[2].toInt(),
+        match.groupValues[3].toInt()
+    )
+}
+
+fun snapshotBuildId(): String {
+    val fromProperty = findProperty("snapshotBuild")?.toString()?.trim().orEmpty()
+    if (fromProperty.isNotEmpty()) return fromProperty
+
+    val fromEnv = System.getenv("GITHUB_RUN_NUMBER")?.trim().orEmpty()
+    if (fromEnv.isNotEmpty()) return fromEnv
+
+    return "local"
+}
+
+fun isFullReleaseBuild(): Boolean {
+    val releaseProp = (findProperty("release")?.toString() ?: "false").toBooleanStrictOrNull() ?: false
+    if (releaseProp) return true
+
+    val branch = runGit("rev-parse", "--abbrev-ref", "HEAD") ?: ""
+    return branch == "prod"
+}
+
+fun computeVersion(): String {
+    val releaseTag = latestReleaseTagOrDefault("v0.0.0")
+    val (major, minor, patch) = parseReleaseTag(releaseTag) ?: Triple(1, 0, 0)
+    val releaseVersion = "$major.$minor.$patch"
+
+    if (isFullReleaseBuild()) {
+        return releaseVersion
+    }
+
+    val nextPatchVersion = "$major.$minor.${patch + 1}"
+    return "$nextPatchVersion-dev.${snapshotBuildId()}"
+}
+
+group = "dev.bypixel"
+val calculatedVersion = computeVersion()
+version = calculatedVersion
+rootProject.version = calculatedVersion
 
 
 repositories {
@@ -73,11 +118,33 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
 }
 
+
 publishing {
+    repositories {
+        maven {
+            name = "bypixelReleases"
+            url = uri("https://repo.bypixel.dev/releases/")
+            credentials{
+                username = findProperty("bypixelRepoUser").toString()
+                password = findProperty("bypixelRepoToken").toString()
+            }
+        }
+
+        maven {
+            name = "bypixelSnapshots"
+            url = uri("https://repo.bypixel.dev/snapshots/")
+            credentials{
+                username = findProperty("bypixelRepoUser").toString()
+                password = findProperty("bypixelRepoToken").toString()
+            }
+        }
+    }
     publications {
         create<MavenPublication>("maven") {
-            from(components["java"])
+            groupId = rootProject.group.toString()
             artifactId = project.name
+            version = rootProject.version.toString()
+            from(project.components["java"])
         }
     }
 }

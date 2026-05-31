@@ -49,37 +49,32 @@
 > Release:
 > ```kotlin
 > maven {
->     name = "jitpack"
->     url = uri("https://jitpack.io/")
+>     name = "bypixelRepoReleases"
+>     url = uri("https://repo.bypixel.dev/releases")
+> }
+> ```
+> Snapshot:
+> ```kotlin
+> maven {
+>     name = "bypixelRepoSnapshots"
+>     url = uri("https://repo.bypixel.dev/snapshots")
 > }
 > ```
 > 2. Add the dependency and Lettuce to your build file:
 >
-> LettuceWrapper: 
-> 
-> [![](https://jitpack.io/v/byPixelTV/LettuceWrapper.svg)](https://jitpack.io/#byPixelTV/LettuceWrapper)
-> [![](https://img.shields.io/badge/Snapshot-nightly--SNAPSHOT-blue)](https://jitpack.io/#byPixelTV/LettuceWrapper)
+> LettuceWrapper:
 >
-> 
-> Lettuce:
-> 
-> [![Maven Central](https://img.shields.io/maven-central/v/io.lettuce/lettuce-core?versionSuffix=RELEASE&logo=redis
-)](https://maven-badges.herokuapp.com/maven-central/io.lettuce/lettuce-core)
-> 
-> KotlinX:
+> [![Latest Version](https://repo.bypixel.dev/api/badge/latest/releases/dev/bypixel/LettuceWrapper?color=40c14a&name=LettuceWrapper-Release)](https://repo.bypixel.dev/#/releases/dev/bypixel/LettuceWrapper)
 >
-> [![Maven Central](https://img.shields.io/maven-central/v/org.jetbrains.kotlinx/kotlinx-coroutines-core?versionPrefix=1&logo=kotlin
-)](https://maven-badges.herokuapp.com/maven-central/io.lettuce/lettuce-core)
+> [![Snapshot Version](https://repo.bypixel.dev/api/badge/latest/snapshots/dev/bypixel/LettuceWrapper?color=40c14a&name=LettuceWrapper-Snapshot)](https://repo.bypixel.dev/#/snapshots/dev/bypixel/LettuceWrapper)
+>
 > ```kotlin
 > dependencies {
 >    implementation("dev.bypixel:LettuceWrapper:VERSION")
-> 
->    // optional
->    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:VERSION")
->    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:VERSION")
 > }
 > ```
 > Replace `VERSION` with the latest version of LettuceWrapper and Lettuce.
 > 3. Start using LettuceWrapper in your project! For more information, check the [docs](https://docs.bypixel.dev/lettucewrapper).
+> Please note that LettuceWrapper includes KotlinX Coroutines and Lettuce, so you don't need to add them as dependencies.
 
 </div>

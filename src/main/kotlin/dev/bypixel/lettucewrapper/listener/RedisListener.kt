@@ -8,6 +8,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 
 abstract class RedisListener(
     channels: Any = emptyList<String>(),
@@ -83,5 +84,11 @@ abstract class RedisListener(
         onMessage(message)
     }
 
-    open fun onMessage(message: String) {}
+    open fun onMessage(message: String) {
+        val jMsg = runCatching { JSONObject(message) }.getOrNull() ?: return
+        if (!jMsg.has("action")) return
+        onLettuceMessage(jMsg.getString("action"), message)
+    }
+
+    open fun onLettuceMessage(action: String, raw: String) {}
 }
