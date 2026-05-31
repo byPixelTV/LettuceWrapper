@@ -83,7 +83,7 @@ fun isFullReleaseBuild(): Boolean {
     if (releaseProp) return true
 
     val branch = runGit("rev-parse", "--abbrev-ref", "HEAD") ?: ""
-    return branch == "prod"
+    return branch == "release"
 }
 
 fun computeVersion(): String {
