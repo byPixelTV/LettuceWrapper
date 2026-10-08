@@ -1,9 +1,9 @@
 import java.io.ByteArrayOutputStream
 
 plugins {
-    kotlin("jvm") version "2.4.20"
+    kotlin("jvm") version "2.4.21"
     id("maven-publish")
-    kotlin("plugin.serialization") version "2.4.20"
+    kotlin("plugin.serialization") version "2.4.21"
 }
 
 fun runGit(vararg args: String): String? {
