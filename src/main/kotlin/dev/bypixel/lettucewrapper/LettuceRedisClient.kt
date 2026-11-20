@@ -1,6 +1,7 @@
 package dev.bypixel.lettucewrapper
 
 import dev.bypixel.lettucewrapper.listener.LettuceMessage
+import dev.bypixel.lettucewrapper.stream.RedisStream
 import io.lettuce.core.*
 import io.lettuce.core.api.StatefulRedisConnection
 import io.lettuce.core.api.async.RedisAsyncCommands
@@ -159,6 +160,8 @@ class LettuceRedisClient(
 
     // sync commands
     val sync: RedisCommands<String, String> = connection.sync()
+
+    fun stream(key: String): RedisStream = RedisStream(this, key)
 
     suspend fun jsonSet(key: String, path: String = ".", json: String): String? = withContext(Dispatchers.IO) {
         withAsync { async ->
