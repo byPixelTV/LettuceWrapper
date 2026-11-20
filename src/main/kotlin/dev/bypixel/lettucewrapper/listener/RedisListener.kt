@@ -2,11 +2,10 @@ package dev.bypixel.lettucewrapper.listener
 
 import dev.bypixel.lettucewrapper.LettuceRedisClient
 import io.lettuce.core.pubsub.RedisPubSubListener
-import io.lettuce.core.pubsub.StatefulRedisPubSubConnection
-import io.lettuce.core.pubsub.api.reactive.RedisPubSubReactiveCommands
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.future.await
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 
@@ -32,16 +31,13 @@ abstract class RedisListener(
         private var isSubscribed = false
 
         private val listenerScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
-        private lateinit var pubSubConnection: StatefulRedisPubSubConnection<String, String>
-        private lateinit var pubSubCommands: RedisPubSubReactiveCommands<String, String>
 
         private fun subscribeToAllChannels() {
             if (lettuceClient == null)
                 throw IllegalStateException("LettuceRedisClient not set. Use RedisListener.setLettuceClient() first.")
 
             if (!isSubscribed) {
-                pubSubConnection = lettuceClient!!.redisClient.connectPubSub()
-                pubSubCommands = pubSubConnection.reactive()
+                val pubSubConnection = lettuceClient!!.redisClient.connectPubSub()
 
                 pubSubConnection.addListener(object : RedisPubSubListener<String, String> {
                     override fun message(channel: String, message: String) {
@@ -66,7 +62,7 @@ abstract class RedisListener(
                     override fun punsubscribed(pattern: String?, count: Long) {}
                 })
 
-                listenerScope.launch { pubSubCommands.psubscribe("*").subscribe() }
+                listenerScope.launch { pubSubConnection.async().psubscribe("*").await() }
                 isSubscribed = true
             }
         }

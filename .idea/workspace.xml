@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e32ef58-f5b3-4d14-9523-aabd77d73e1f" name="Changes" comment="chore: dont build gradle project itself in ci">
+    <list default="true" id="1e32ef58-f5b3-4d14-9523-aabd77d73e1f" name="Changes" comment="feat: redis streams utility">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/dev/bypixel/lettucewrapper/LettuceRedisClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/dev/bypixel/lettucewrapper/LettuceRedisClient.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,6 +106,65 @@
   }
 }</component>
   <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$" gradleHome="D:\Dev\Java\.gradle\wrapper\dists\gradle-9.3.1-bin\23ovyewtku6u96viwx3xl3oks\gradle-9.3.1" javaHome="C:\Users\lukas\.jdks\jbrsdk_jcef-21.0.9" gradleVersion="9.3.1" />
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0044446558188118" />
+      <entry key="MS500" value="1.6982575471043377" />
+      <entry key="S2" value="4.306243593415778" />
+      <entry key="S5" value="6.07384169710738" />
+      <entry key="S10" value="6.936006540885247" />
+      <entry key="S30" value="7.619640829578322" />
+      <entry key="S60" value="7.806377004406441" />
+      <entry key="M2" value="7.902309139237641" />
+      <entry key="M5" value="7.960710188592777" />
+      <entry key="M10" value="7.980319312628785" />
+      <entry key="M15" value="7.986871575095816" />
+      <entry key="M30" value="7.993431800418317" />
+      <entry key="H1" value="7.996714902713327" />
+      <entry key="H2" value="7.998357201893464" />
+      <entry key="H4" value="7.999178538569773" />
+      <entry key="D1" value="7.999863081097215" />
+      <entry key="W1" value="7.999980439944544" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.9569294375672072" />
+      <entry key="MS500" value="1.6826342007904318" />
+      <entry key="S2" value="4.295380497331482" />
+      <entry key="S5" value="6.067528450881981" />
+      <entry key="S10" value="6.932369749431497" />
+      <entry key="S30" value="7.618301843099171" />
+      <entry key="S60" value="7.805690222283458" />
+      <entry key="M2" value="7.901961308905604" />
+      <entry key="M5" value="7.960569975676648" />
+      <entry key="M10" value="7.980249024744294" />
+      <entry key="M15" value="7.986824676092603" />
+      <entry key="M30" value="7.993408330685736" />
+      <entry key="H1" value="7.996703162784751" />
+      <entry key="H2" value="7.998351330663035" />
+      <entry key="H4" value="7.999175602637952" />
+      <entry key="D1" value="7.999862591731267" />
+      <entry key="W1" value="7.999980370034045" />
+    </decayedShown>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -115,38 +172,38 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Gradle.Download Sources.executor": "Run",
-    "Gradle.LettuceWrapper [build].executor": "Run",
-    "Gradle.LettuceWrapper [publishMavenPublicationToBypixelReleasesRepository].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "nightly",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Dev/Java/LettuceWrapper",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LettuceWrapper [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LettuceWrapper [publishMavenPublicationToBypixelReleasesRepository].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;nightly&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Dev/Java/LettuceWrapper&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Gradle.LettuceWrapper [build]">
     <configuration name="LettuceWrapper [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -617,7 +674,6 @@
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[ci skip] fix(readme): click url of snapshot badge was pointing to releases page" />
     <MESSAGE value="feat(client): add sendPlainMessage method for sending messages with only text" />
     <MESSAGE value="chore(redis listener): there is only one onMessage method now with an optional channel param" />
     <MESSAGE value="chore(redis listener): trying to solve that you only need one override" />
@@ -642,7 +698,8 @@
     <MESSAGE value="fix: update kotlinx serialization" />
     <MESSAGE value="fix: versioning is broken" />
     <MESSAGE value="fix: release versioning" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: release versioning" />
+    <MESSAGE value="feat: redis streams utility" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: redis streams utility" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
